@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - dev       # for dev branch
-  pull_request:
-    types: [closed]
-    branches:
-      - main        # for main branch
+      - main
+  # pull_request:
+  #   types: [closed]
+  #   branches:
+  #     - main        # for main branch
 
 env:
   APP_NAME: argo-helm
@@ -18,7 +19,7 @@ env:
 jobs:
 
   build:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    if: github.event_name == 'push'  
     runs-on: ubuntu-latest
 
     permissions:
@@ -35,11 +36,7 @@ jobs:
       - name: set image tag
         id: set_image_tag    #Assigns a unique identifier to this step, Allows other steps to reference outputs from this step
         run: |
-          if [ "${{ github.event_name }}" = pull_request ]; then
-            TAG="PR-${{ github.event.pull_request.number }}"
-          else
-            TAG="${GITHUB_SHA::7}"
-          fi
+          TAG="${GITHUB_SHA::7}"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: loginto docker
