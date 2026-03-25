@@ -3,10 +3,12 @@ name : argo-helm
 on:
   push:
     branches:
-      - dev         # for dev branch
+      - dev       # for dev branch
+      - main        # for main branch
   pull_request:
     types: [closed]
     branches:
+      - dev       # for dev branch
       - main        # for main branch
 
 env:
