@@ -4,6 +4,9 @@ kind: Ingress
 metadata:
   name: {{ include "argo-helm.fullname" . }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
