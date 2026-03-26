@@ -12,8 +12,8 @@ spec:
     helm:
       valueFiles:
         - values-prod.yaml
-  destination: https://kubernetes.default.svc
-    server: 
+  destination: 
+    server: https://kubernetes.default.svc
     namespace: prod
   syncPolicy:
     automated:
