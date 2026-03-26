@@ -4,16 +4,16 @@ metadata:
   name: {{ include "argo-helm.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ include "argo-helm.name" . }}
+    app: {{ - include "argo-helm.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "argo-helm.name" . }}
+      app: {{- include "argo-helm.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ include "argo-helm.name" . }}
+        app: {{- include "argo-helm.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
