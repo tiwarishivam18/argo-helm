@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mygoapp-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tiwarishivam18/argo-helm.git
+    targetRevision: main
+    path: gitops/helm/argo-helm
+    helm:
+      valueFiles:
+        - values-prod.yaml
+  destination: https://kubernetes.default.svc
+    server: 
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
