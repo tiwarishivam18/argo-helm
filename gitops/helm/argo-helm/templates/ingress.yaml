@@ -14,7 +14,7 @@ spec:
             pathType: {{ .Values.ingress.pathType }}
             backend:
               service:
-                name: {{ include "mygoapp.fullname" . }}
+                name: {{ include "argo-helm.fullname" . }}
                 port:
                   number: {{ .Values.service.port }}
 {{- end }}
